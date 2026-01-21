@@ -4,7 +4,7 @@ let currentFormat = true; // Формат отображения цен
 let nftData = []; // Массив данных NFT
 
 // URL для API
-const API_URL = 'https://gist.githubusercontent.com/dimashloyger02/8b284087c457766cde58c64507cc9af3/raw/b45a3535a1471a86838ccc1095e2aa5f96619db1/nft-data.json';
+const API_URL = 'https://gist.githubusercontent.com/dimashloyger02/8b284087c457766cde58c64507cc9af3/raw/e1e52bbc0f06433fc7a11e877e9d0a646bd2538c/nft-data.json';
 
 // Модифицированная функция загрузки с индикатором
 function loadData() {
