@@ -1,0 +1,107 @@
+    /* Подключение кастомных шрифтов */
+@font-face {
+    font-family: '1';
+    src: url('https://forumstatic.ru/files/001b/2f/d7/17324.ttf?v=1');
+}
+
+@font-face {
+    font-family: '2';
+    src: url('https://forumstatic.ru/files/001b/2f/d7/65040.ttf?v=1');
+}
+
+@font-face {
+    font-family: '3';
+    src: url('https://forumstatic.ru/files/001a/a3/94/73088.ttf?v=1');
+}
+body{
+font-family: '3';
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+.nft-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nft-card {
+    background: #333;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    width: calc(50% - 20px); /* Ширина для 2 колонок */
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.nft-image img {
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+    object-fit: cover; /* Сохраняем пропорции изображения */
+    height: 192px; /* Фиксированная высота для единообразия */
+}
+
+.nft-info {
+    padding: 10px;
+    color: white;
+}
+
+.actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-sell, .btn-details {
+    margin: 0 5px;
+    padding: 5px 10px;
+    background: #555;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-sell {
+    background: #ff0000;
+}
+
+.btn-details {
+    background: #0099FF;
+}
+
+.nft-title {
+    color: #FF9900;
+}
+
+.nft-id, .nft-price {
+    color: #999999;
+}
+
+.nft-link {
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nft-link:hover {
+    text-decoration: underline;
+    color: #ff0000;
+}
+
+.nft-owner a {
+    color: #e74c3c;
+    text-decoration: none;
+}
+
+.nft-owner a:hover {
+    text-decoration: underline;
+}
