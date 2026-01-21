@@ -1,1 +1,31 @@
-Ок
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFT Маркетплейс</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div class="sort-controls">
+        <select id="sort-select">
+            <option value="price-asc">По цене (от низкой к высокой)</option>
+            <option value="price-desc">По цене (от высокой к низкой)</option>
+            <option value="id-asc">По ID (по возрастанию)</option>
+            <option value="id-desc">По ID (по убыванию)</option>
+        </select>
+    </div>
+    
+    <button onclick="togglePriceFormat(true)">Показать в Stars</button>
+    <button onclick="togglePriceFormat(false)">Показать в TON</button>
+
+    <!-- Индикатор загрузки -->
+    <div class="loading-indicator" style="display:none;">
+        <p>Загрузка данных...</p>
+    </div>
+
+    <div class="nft-container"></div>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>
