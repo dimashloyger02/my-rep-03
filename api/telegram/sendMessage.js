@@ -1,25 +1,33 @@
-const axios = require('axios');
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+// api/telegram/sendMessage.js
 
-module.exports = async (req, res) => {
+const TELEGRAM_BOT_TOKEN = 'ВАШ_ТОКЕН'; // Не забудьте заменить на реальный токен
+
+export async function sendMessage(chatId, text) {
     try {
-        const { chat_id, text } = req.query;
-        
-        if (!chat_id || !text) {
-            return res.status(400).json({ error: 'Неверные параметры' });
-        }
-
-        const response = await axios.post(
+        const response = await fetch(
             `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
             {
-                chat_id: chat_id,
-                text: text
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: text
+                })
             }
         );
 
-        res.json(response.data);
-    } catch (error) {
-        console.error('Ошибка при отправке сообщения:', error);
-        res.status(500).json({ error: 'Произошла ошибка' });
+        const data = await response.json();
+        
+        if (!data.ok) {
+            throw new Error(data.description);
+        }
+        
+        return data;
+    } 
+    catch (error) {
+        console.error('Ошибка отправки сообщения:', error);
+        throw error;
     }
-};
+}
