@@ -1,24 +1,31 @@
 // utils.js
-export function sendTelegramMessage(chat_id, text) {
-    return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', '/sendMessage', true);
-        
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    try {
-                        resolve(JSON.parse(xhr.responseText));
-                    } catch (error) {
-                        reject(error);
-                    }
-                } else {
-                    reject(new Error('Ошибка сервера: ' + xhr.status));
-                }
-            }
-        };
+let socket;
 
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.send(`chat_id=${encodeURIComponent(chat_id)}&text=${encodeURIComponent(text)}`);
-    });
+export function initWebSocket() {
+    // Для Vercel лучше использовать относительный путь
+    socket = new WebSocket('/ws');
+    
+    socket.onopen = () => {
+        console.log('WebSocket connected');
+    };
+    
+    socket.onerror = (error) => {
+        console.error('WebSocket error:', error);
+    };
+    
+    socket.onclose = () => {
+        console.log('WebSocket closed');
+        // Можно добавить автоматическую переподключение
+    };
+}
+
+export function sendTelegramMessage(chat_id, text) {
+    if (!socket || socket.readyState !== WebSocket.OPEN) {
+        throw new Error('WebSocket не подключен');
+    }
+    
+    socket.send(JSON.stringify({
+        chat_id: chat_id,
+        text: text
+    }));
 }
