@@ -26,6 +26,35 @@
 
     <div class="nft-container"></div>
 
-    <script type="module" src="scripts/main.js"></script>
+    <script src="scripts/main.js"></script>
+    <!-- В вашем HTML файле -->
+<script src="/api/telegram/sendMessage.js"></script>
+<script src="/api/telegram/editMessageText.js"></script>
+
+<script>
+    // Пример использования sendMessage
+    async function sendNotification() {
+        try {
+            const result = await sendMessage('ЧАТ_ИД', 'Привет, это тестовое сообщение!');
+            console.log('Сообщение отправлено:', result);
+        } catch (error) {
+            console.error('Ошибка:', error);
+        }
+    }
+
+    // Пример использования editMessageText
+    async function editExistingMessage() {
+        try {
+            const result = await editMessageText(
+                'ЧАТ_ИД', 
+                'ИДЕНТИФИКАТОР_СООБЩЕНИЯ', 
+                'Отредактированное сообщение'
+            );
+            console.log('Сообщение отредактировано:', result);
+        } catch (error) {
+            console.error('Ошибка:', error);
+        }
+    }
+</script>
 </body>
 </html>
