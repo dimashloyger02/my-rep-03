@@ -237,3 +237,29 @@ document.addEventListener('DOMContentLoaded', () => {
     loadData(); // Загружаем данные
     initEvents(); // Инициализируем события
 });
+
+// Подключение необходимых модулей
+import { initWebSocket } from './utils';
+import { sendTelegramMessage } from './utils';
+
+// Инициализация WebSocket при загрузке приложения
+window.addEventListener('DOMContentLoaded', () => {
+    initWebSocket();
+});
+
+// Пример использования отправки сообщения
+// Этот код можно поместить в обработчик события (например, клик на кнопку)
+document.addEventListener('DOMContentLoaded', () => {
+    const sellButton = document.querySelector('.sell-button');
+    
+    if (sellButton) {
+        sellButton.addEventListener('click', () => {
+            try {
+                // Здесь указываете реальный chat_id и текст сообщения
+                sendTelegramMessage('ВАШ_ID_ЧАТА', 'NFT выставлен на продажу!');
+            } catch (error) {
+                console.error('Ошибка при отправке сообщения:', error);
+            }
+        });
+    }
+});
