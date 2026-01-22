@@ -1,6 +1,6 @@
 // api/telegram/editMessageText.js
 
-const TELEGRAM_BOT_TOKEN = 'ВАШ_ТОКЕН'; // Тот же токен, что и выше
+const TELEGRAM_BOT_TOKEN = '8318160592:AAFW70-IjNWu2vv5rdqpF_DMRzyed4mva0E'; // Тот же токен, что и выше
 
 export async function editMessageText(chatId, messageId, text) {
     try {
