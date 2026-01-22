@@ -1,7 +1,13 @@
-// Константы
+// Константы и глобальные переменные
 const STARS_TO_TON_RATE = 0.00936;
 let currentFormat = true; // Формат отображения цен
 let nftData = []; // Массив данных NFT
+let chatId = 'ВАШ_ID_ЧАТА'; // Инициализируем переменную для chat_id
+
+// Функция валидации chatId
+function validateChatId(id) {
+    return typeof id === 'string' && id.trim().length > 0;
+}
 
 // URL для API
 const API_URL = 'https://gist.githubusercontent.com/dimashloyger02/8b284087c457766cde58c64507cc9af3/raw/d0d42f9b7dee5e0d99b35174c673ce9998f3b978/nft-data.json';
@@ -232,12 +238,7 @@ function showSellModal(nftId) {
     }
 }
 
-// Инициализация при загрузке страницы
-document.addEventListener('DOMContentLoaded', () => {
-    loadData(); // Загружаем данные
-    initEvents(); // Инициализируем события
-});
-
+// Модифицированная часть с использованием chatId
 // Подключение необходимых модулей
 import { initWebSocket } from './utils';
 import { sendTelegramMessage } from './utils';
@@ -248,18 +249,37 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // Пример использования отправки сообщения
-// Этот код можно поместить в обработчик события (например, клик на кнопку)
 document.addEventListener('DOMContentLoaded', () => {
     const sellButton = document.querySelector('.sell-button');
     
     if (sellButton) {
         sellButton.addEventListener('click', () => {
-            try {
-                // Здесь указываете реальный chat_id и текст сообщения
-                sendTelegramMessage('ВАШ_ID_ЧАТА', 'NFT выставлен на продажу!');
-            } catch (error) {
-                console.error('Ошибка при отправке сообщения:', error);
+            if (validateChatId(chatId)) {
+                try {
+                    // Используем переменную chatId
+                    sendTelegramMessage(chatId, 'NFT выставлен на продажу!');
+                } catch (error) {
+                    console.error('Ошибка при отправке сообщения:', error);
+                }
+            } else {
+                console.error('Неверный формат chatId');
             }
         });
     }
+});
+
+// Дополнительно можно добавить функцию для изменения chatId
+function setChatId(newId) {
+    if (validateChatId(newId)) {
+        chatId = newId;
+        console.log('chatId успешно обновлен');
+    } else {
+        console.error('Неверный формат нового chatId');
+    }
+}
+
+// Инициализация при загрузке страницы остается без изменений
+document.addEventListener('DOMContentLoaded', () => {
+    loadData(); // Загружаем данные
+    initEvents(); // Инициализируем события
 });
