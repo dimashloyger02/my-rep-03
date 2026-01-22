@@ -1,6 +1,6 @@
 // api/telegram/sendMessage.js
 
-const TELEGRAM_BOT_TOKEN = 'ВАШ_ТОКЕН'; // Не забудьте заменить на реальный токен
+const TELEGRAM_BOT_TOKEN = '8318160592:AAFW70-IjNWu2vv5rdqpF_DMRzyed4mva0E'; // Не забудьте заменить на реальный токен
 
 export async function sendMessage(chatId, text) {
     try {
