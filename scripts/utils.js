@@ -1,31 +1,31 @@
 // utils.js
-let socket;
-
-export function initWebSocket() {
-    // Для Vercel лучше использовать относительный путь
-    socket = new WebSocket('/ws');
-    
-    socket.onopen = () => {
-        console.log('WebSocket connected');
-    };
-    
-    socket.onerror = (error) => {
-        console.error('WebSocket error:', error);
-    };
-    
-    socket.onclose = () => {
-        console.log('WebSocket closed');
-        // Можно добавить автоматическую переподключение
-    };
-}
 
 export function sendTelegramMessage(chat_id, text) {
-    if (!socket || socket.readyState !== WebSocket.OPEN) {
-        throw new Error('WebSocket не подключен');
+    try {
+        const apiToken = 'ВАШ_API_ТОКЕН'; // Замените на реальный токен
+        const url = `https://api.telegram.org/bot${apiToken}/sendMessage`;
+        
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                chat_id: chat_id,
+                text: text
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.ok) {
+                throw new Error(data.description);
+            }
+            console.log('Сообщение отправлено успешно');
+        })
+        .catch(error => {
+            console.error('Ошибка отправки сообщения:', error);
+        });
+    } catch (error) {
+        console.error('Ошибка в sendTelegramMessage:', error);
     }
-    
-    socket.send(JSON.stringify({
-        chat_id: chat_id,
-        text: text
-    }));
 }
