@@ -240,7 +240,6 @@ function showSellModal(nftId) {
 
 // Модифицированная часть с использованием chatId
 // Подключение необходимых модулей
-import { initWebSocket } from './utils';
 import { sendTelegramMessage } from './utils';
 
 // Инициализация WebSocket при загрузке приложения
