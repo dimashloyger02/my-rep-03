@@ -35,7 +35,7 @@
     // Пример использования sendMessage
     async function sendNotification() {
         try {
-            const result = await sendMessage('ЧАТ_ИД', 'Привет, это тестовое сообщение!');
+            const result = await sendMessage('1763784339', 'Привет, это тестовое сообщение!');
             console.log('Сообщение отправлено:', result);
         } catch (error) {
             console.error('Ошибка:', error);
@@ -46,8 +46,8 @@
     async function editExistingMessage() {
         try {
             const result = await editMessageText(
-                'ЧАТ_ИД', 
-                'ИДЕНТИФИКАТОР_СООБЩЕНИЯ', 
+                '1763784339', 
+                '0', 
                 'Отредактированное сообщение'
             );
             console.log('Сообщение отредактировано:', result);
