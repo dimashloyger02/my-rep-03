@@ -2,7 +2,7 @@
 const TELEGRAM_BOT_TOKEN = '8318160592:AAFW70-IjNWu2vv5rdqpF_DMRzyed4mva0E';
 
 function sendMessage(chatId, text) {
-    return new Promise((resolve, reject) => {
+    return new Promise(function(resolve, reject) {
         // Валидация входных параметров
         if (typeof chatId !== 'string' || chatId.trim() === '') {
             reject(new Error('Неверный chat_id'));
@@ -30,19 +30,19 @@ function sendMessage(chatId, text) {
                 })
             }
         )
-        .then(response => {
+        .then(function(response) {
             if (!response.ok) {
                 throw new Error(`HTTP ошибка: ${response.status} - ${response.statusText}`);
             }
             return response.json();
         })
-        .then(data => {
+        .then(function(data) {
             if (!data.ok) {
                 throw new Error(data.description);
             }
             resolve(data);
         })
-        .catch(error => {
+        .catch(function(error) {
             console.error('Ошибка отправки сообщения:', error);
             reject(error);
         });
