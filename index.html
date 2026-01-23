@@ -32,6 +32,8 @@
 <script src="/api/telegram/editMessageText.js"></script>
 
 <script>
+    import { sendMessage, editMessageText } from '/api/telegram/sendMessage.js';
+
     // Функция для отправки и получения message_id
     async function sendAndEditMessage() {
         try {
