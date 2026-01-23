@@ -33,20 +33,22 @@
 <script>
     async function sendAndEditMessage() {
         try {
+            console.log('Начинаем выполнение');
+            
             const chatId = '1763784339';
             const initialText = 'Привет, это тестовое сообщение!';
             
-            // Отправляем сообщение
+            console.log('Отправляем сообщение...');
             const sendResult = await sendMessage(chatId, initialText);
+            console.log('Результат отправки:', sendResult);
+            
             const messageId = sendResult.result.message_id;
+            console.log('Получен message_id:', messageId);
             
-            console.log('Сообщение отправлено, message_id:', messageId);
-            
-            // Редактируем сообщение
             const newText = 'Отредактированное сообщение';
+            console.log('Редактируем сообщение...');
             const editResult = await editMessageText(chatId, messageId, newText);
-            
-            console.log('Сообщение отредактировано:', editResult);
+            console.log('Результат редактирования:', editResult);
         } catch (error) {
             console.error('Произошла ошибка:', error);
         }
