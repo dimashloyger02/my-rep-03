@@ -1,8 +1,19 @@
 // api/telegram/editMessageText.js
 
-const TELEGRAM_BOT_TOKEN = '8318160592:AAFW70-IjNWu2vv5rdqpF_DMRzyed4mva0E'; // Тот же токен, что и выше
+const TELEGRAM_BOT_TOKEN = '8318160592:AAFW70-IjNWu2vv5rdqpF_DMRzyed4mva0E';
 
 export async function editMessageText(chatId, messageId, text) {
+    // Валидация входных параметров
+    if (typeof chatId !== 'string' || chatId.trim() === '') {
+        throw new Error('Неверный chat_id');
+    }
+    if (typeof messageId !== 'number' || messageId <= 0) {
+        throw new Error('Неверный message_id');
+    }
+    if (typeof text !== 'string' || text.trim() === '') {
+        throw new Error('Неверный текст сообщения');
+    }
+
     try {
         const response = await fetch(
             `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/editMessageText`,
@@ -18,6 +29,11 @@ export async function editMessageText(chatId, messageId, text) {
                 })
             }
         );
+
+        // Проверяем статус ответа
+        if (!response.ok) {
+            throw new Error(`HTTP ошибка: ${response.status} - ${response.statusText}`);
+        }
 
         const data = await response.json();
         
