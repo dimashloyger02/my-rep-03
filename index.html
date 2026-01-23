@@ -27,34 +27,40 @@
     <div class="nft-container"></div>
 
     <script src="scripts/main.js"></script>
-    <!-- В вашем HTML файле -->
+<!-- В вашем HTML файле -->
 <script src="/api/telegram/sendMessage.js"></script>
 <script src="/api/telegram/editMessageText.js"></script>
 
 <script>
-    // Пример использования sendMessage
-    async function sendNotification() {
+    // Функция для отправки и получения message_id
+    async function sendAndEditMessage() {
         try {
-            const result = await sendMessage('1763784339', 'Привет, это тестовое сообщение!');
-            console.log('Сообщение отправлено:', result);
+            // Сначала отправляем сообщение
+            const chatId = '1763784339';
+            const initialText = 'Привет, это тестовое сообщение!';
+            
+            // Отправляем сообщение и получаем результат
+            const sendResult = await sendMessage(chatId, initialText);
+            
+            // Получаем message_id из результата
+            const messageId = sendResult.result.message_id;
+            
+            console.log('Сообщение отправлено, message_id:', messageId);
+            
+            // Теперь редактируем сообщение
+            const newText = 'Отредактированное сообщение';
+            const editResult = await editMessageText(chatId, messageId, newText);
+            
+            console.log('Сообщение отредактировано:', editResult);
         } catch (error) {
-            console.error('Ошибка:', error);
+            console.error('Произошла ошибка:', error);
         }
     }
 
-    // Пример использования editMessageText
-    async function editExistingMessage() {
-        try {
-            const result = await editMessageText(
-                '1763784339', 
-                '0', 
-                'Отредактированное сообщение'
-            );
-            console.log('Сообщение отредактировано:', result);
-        } catch (error) {
-            console.error('Ошибка:', error);
-        }
-    }
+    // Вызываем функцию при загрузке страницы
+    document.addEventListener('DOMContentLoaded', () => {
+        sendAndEditMessage();
+    });
 </script>
 </body>
 </html>
