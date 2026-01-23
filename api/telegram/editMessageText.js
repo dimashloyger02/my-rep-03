@@ -1,6 +1,6 @@
 // editMessageText.js
 function editMessageText(chatId, messageId, text) {
-    return new Promise((resolve, reject) => {
+    return new Promise(function(resolve, reject) {
         fetch(
             `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/editMessageText`,
             {
@@ -15,19 +15,19 @@ function editMessageText(chatId, messageId, text) {
                 })
             }
         )
-        .then(response => {
+        .then(function(response) {
             if (!response.ok) {
                 throw new Error(`HTTP ошибка: ${response.status} - ${response.statusText}`);
             }
             return response.json();
         })
-        .then(data => {
+        .then(function(data) {
             if (!data.ok) {
                 throw new Error(data.description);
             }
             resolve(data);
         })
-        .catch(error => {
+        .catch(function(error) {
             console.error('Ошибка редактирования сообщения:', error);
             reject(error);
         });
