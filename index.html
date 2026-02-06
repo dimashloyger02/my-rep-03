@@ -27,29 +27,6 @@
     <div class="nft-container"></div>
 
     <script src="scripts/main.js"></script>
-<script src="scripts/api/telegram/sendMessage.js"></script>
-<script src="scripts/api/telegram/editMessageText.js"></script>
 
-<script>
-    function sendAndEditMessage() {
-        sendMessage('1763784339', 'Привет, это тестовое сообщение!')
-            .then(function(sendResult) {
-                console.log('Сообщение отправлено:', sendResult);
-                const messageId = sendResult.result.message_id;
-                
-                return editMessageText('1763784339', messageId, 'Отредактированное сообщение');
-            })
-            .then(function(editResult) {
-                console.log('Сообщение отредактировано:', editResult);
-            })
-            .catch(function(error) {
-                console.error('Произошла ошибка:', error);
-            });
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        sendAndEditMessage();
-    });
-</script>
 </body>
 </html>
